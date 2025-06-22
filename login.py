@@ -1,6 +1,6 @@
 def login_system():
     """
-    A simple login system that prompts for a username and password
+    A simple login system that prompts for a username and password.
     and checks them against hardcoded values.
     """
     correct_username = "admin"
