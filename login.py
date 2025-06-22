@@ -4,7 +4,7 @@ def login_system():
     and checks them against hardcoded values.
     """
     correct_username = "admin"
-    correct_password = "password1234"
+    correct_password = "password"
 
     username = input("Enter username: ")
     password = input("Enter password: ")
