@@ -12,7 +12,7 @@ def login_system():
     if username == correct_username and password == correct_password:
         print("Login successful! Welcome.......")
     else:
-        print("Invalid username or password. Please try again!!!!!!!!")
+        print("Invalid username or password. Please try again!!!!!!!")
 
 # Call the login system function to initiate the login process
 login_system()
