@@ -14,6 +14,7 @@ search_box = driver.find_element(By.NAME, "q")
 
 # Enter the search term "Selenium in search bar"
 search_box.send_keys("Selenium")
+time.sleep(2)
 
 # Press Enter to perform the search
 search_box.send_keys(Keys.RETURN)
