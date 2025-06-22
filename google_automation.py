@@ -12,7 +12,7 @@ driver.get("https://www.google.com")
 # Find the search box element (by name)
 search_box = driver.find_element(By.NAME, "q")
 
-# Enter the search term "Selenium"
+# Enter the search term "Selenium in search bar"
 search_box.send_keys("Selenium")
 
 # Press Enter to perform the search
