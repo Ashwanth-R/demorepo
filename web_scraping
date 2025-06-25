@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 url = "https://www.example.com"
 response = requests.get(url)
-soup = BeautifulSoup(response.text, 'html.parser ')
+soup = BeautifulSoup(response.text, 'html.parser')
 
 # Extract all links from the url
 for link in soup.find_all('a'):
