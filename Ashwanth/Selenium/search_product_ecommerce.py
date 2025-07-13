@@ -1,4 +1,4 @@
-from login import login_to_site
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
@@ -7,7 +7,7 @@ import time
 username = "testuser"
 password = "testpass"
 
-driver = login_to_site(username, password)
+driver = webdriver.Chrome()
 
 if driver:
     try:
