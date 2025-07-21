@@ -4,6 +4,7 @@ struct UserDataFormView: View {
     @State private var name: String = ""
     @State private var email: String = ""
     @State private var age: String = ""
+    @State private var phone: String = ""
     @State private var submitted: Bool = false
 
     var body: some View {
@@ -15,15 +16,17 @@ struct UserDataFormView: View {
                         .keyboardType(.emailAddress)
                     TextField("Age", text: $age)
                         .keyboardType(.numberPad)
+                    TextField("Phone", text: $phone)
+                        .keyboardType(.phonePad)
                 }
                 Button("Submit") {
                     submitted = true
                 }
-                .disabled(name.isEmpty || email.isEmpty || age.isEmpty)
+                .disabled(name.isEmpty || email.isEmpty || age.isEmpty || phone.isEmpty || !email.contains("@"))
             }
             .navigationTitle("User Data Form")
             .alert(isPresented: $submitted) {
-                Alert(title: Text("Submitted!"), message: Text("Name: \(name)\nEmail: \(email)\nAge: \(age)"), dismissButton: .default(Text("OK")))
+                Alert(title: Text("Submitted!"), message: Text("Name: \(name)\nEmail: \(email)\nAge: \(age)\nPhone: \(phone)"), dismissButton: .default(Text("OK")))
             }
         }
     }
