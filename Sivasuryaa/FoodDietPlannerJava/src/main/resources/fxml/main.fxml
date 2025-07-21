@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sivasuryaa.fooddietplanner.controller.MainController">
+   <top>
+      <VBox styleClass="header-section">
+         <children>
+            <!-- Header with title and user info -->
+            <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="header-bar">
+               <children>
+                  <Label styleClass="app-title" text="Food Diet Planner" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="profileButton" mnemonicParsing="false" onAction="#showProfileSettings" styleClass="header-button" text="Profile" />
+                  <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#showSettings" styleClass="header-button" text="Settings" />
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+               </padding>
+            </HBox>
+            
+            <!-- Quick stats bar -->
+            <HBox alignment="CENTER" spacing="30.0" styleClass="stats-bar">
+               <children>
+                  <VBox alignment="CENTER" spacing="5.0" styleClass="stat-item">
+                     <children>
+                        <Label fx:id="todayCaloriesLabel" styleClass="stat-value" text="0" />
+                        <Label styleClass="stat-label" text="Calories Today" />
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" />
+                  <VBox alignment="CENTER" spacing="5.0" styleClass="stat-item">
+                     <children>
+                        <Label fx:id="calorieGoalLabel" styleClass="stat-value" text="2000" />
+                        <Label styleClass="stat-label" text="Daily Goal" />
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" />
+                  <VBox alignment="CENTER" spacing="5.0" styleClass="stat-item">
+                     <children>
+                        <Label fx:id="remainingCaloriesLabel" styleClass="stat-value" text="2000" />
+                        <Label styleClass="stat-label" text="Remaining" />
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" />
+                  <VBox alignment="CENTER" spacing="5.0" styleClass="stat-item">
+                     <children>
+                        <ProgressBar fx:id="calorieProgressBar" prefWidth="120.0" progress="0.0" styleClass="calorie-progress" />
+                        <Label styleClass="stat-label" text="Progress" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   
+   <center>
+      <SplitPane dividerPositions="0.7" styleClass="main-split-pane">
+         <items>
+            <!-- Main content area -->
+            <VBox spacing="20.0" styleClass="main-content">
+               <children>
+                  <!-- Date navigation -->
+                  <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="date-navigation">
+                     <children>
+                        <Button fx:id="previousDayButton" mnemonicParsing="false" onAction="#goToPreviousDay" styleClass="nav-button" text="◀" />
+                        <DatePicker fx:id="datePicker" onAction="#onDateChanged" prefWidth="150.0" styleClass="date-picker" />
+                        <Button fx:id="nextDayButton" mnemonicParsing="false" onAction="#goToNextDay" styleClass="nav-button" text="▶" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button fx:id="addMealButton" mnemonicParsing="false" onAction="#addNewMeal" styleClass="primary-button" text="+ Add Meal" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  
+                  <!-- Meals section -->
+                  <VBox spacing="15.0" styleClass="meals-section">
+                     <children>
+                        <Label styleClass="section-header" text="Today's Meals" />
+                        <ScrollPane fx:id="mealsScrollPane" fitToWidth="true" styleClass="meals-scroll">
+                           <content>
+                              <VBox fx:id="mealsContainer" spacing="10.0" styleClass="meals-container">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" top="10.0" />
+               </padding>
+            </VBox>
+            
+            <!-- Right sidebar with nutrition info and charts -->
+            <VBox spacing="20.0" styleClass="sidebar">
+               <children>
+                  <!-- Nutrition summary -->
+                  <VBox spacing="15.0" styleClass="nutrition-summary">
+                     <children>
+                        <Label styleClass="sidebar-header" text="Nutrition Summary" />
+                        
+                        <!-- Macros breakdown -->
+                        <VBox spacing="10.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <Label styleClass="macro-label" text="Protein:" />
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label fx:id="proteinLabel" styleClass="macro-value" text="0g" />
+                                 </children>
+                              </HBox>
+                              <ProgressBar fx:id="proteinProgressBar" maxWidth="Infinity" progress="0.0" styleClass="protein-progress" />
+                              
+                              <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <Label styleClass="macro-label" text="Carbs:" />
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label fx:id="carbsLabel" styleClass="macro-value" text="0g" />
+                                 </children>
+                              </HBox>
+                              <ProgressBar fx:id="carbsProgressBar" maxWidth="Infinity" progress="0.0" styleClass="carbs-progress" />
+                              
+                              <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <Label styleClass="macro-label" text="Fat:" />
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label fx:id="fatLabel" styleClass="macro-value" text="0g" />
+                                 </children>
+                              </HBox>
+                              <ProgressBar fx:id="fatProgressBar" maxWidth="Infinity" progress="0.0" styleClass="fat-progress" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Calorie distribution chart -->
+                  <VBox spacing="15.0" styleClass="chart-section">
+                     <children>
+                        <Label styleClass="sidebar-header" text="Calorie Distribution" />
+                        <PieChart fx:id="calorieDistributionChart" legendVisible="false" prefHeight="200.0" styleClass="calorie-chart" />
+                     </children>
+                  </VBox>
+                  
+                  <!-- Weekly progress chart -->
+                  <VBox spacing="15.0" styleClass="chart-section">
+                     <children>
+                        <Label styleClass="sidebar-header" text="Weekly Progress" />
+                        <LineChart fx:id="weeklyProgressChart" prefHeight="200.0" styleClass="progress-chart">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis side="LEFT" />
+                           </yAxis>
+                        </LineChart>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Quick actions -->
+                  <VBox spacing="10.0" styleClass="quick-actions">
+                     <children>
+                        <Label styleClass="sidebar-header" text="Quick Actions" />
+                        <Button fx:id="viewAnalyticsButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#showAnalytics" styleClass="action-button" text="View Analytics" />
+                        <Button fx:id="exportDataButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#exportData" styleClass="action-button" text="Export Data" />
+                        <Button fx:id="backupDataButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#backupData" styleClass="action-button" text="Backup Data" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="15.0" right="15.0" top="10.0" />
+               </padding>
+            </VBox>
+         </items>
+      </SplitPane>
+   </center>
+   
+   <bottom>
+      <HBox alignment="CENTER" spacing="20.0" styleClass="footer">
+         <children>
+            <Label fx:id="statusLabel" styleClass="status-label" text="Ready" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label styleClass="footer-info" text="Food Diet Planner v1.0" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </HBox>
+   </bottom>
+</BorderPane>
